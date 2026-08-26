@@ -36,6 +36,7 @@ public class ICE_TASK_2 {
         System.out.println("Difference:" + Sum);
         System.out.println("Multiple:" + Sum);
         System.out.println("Quotient:" + Quotient);
+        System.out.println("Average:" + Average);
        
        
         scanner.close();
