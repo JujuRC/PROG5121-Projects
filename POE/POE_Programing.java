@@ -10,6 +10,8 @@ package com.mycompany.poe_programing;
  */
 
 import java.util.Scanner; 
+import java.util.regex.Pattern;
+import java.util.regex.Matcher;
 
 
 public class POE_Programing {
@@ -48,26 +50,57 @@ public static boolean bCheckPassword(String sPassword) {
     return bCapital && bNumber && bSpecial;
 }
 
+//Validating the cellphone number according to the rules
+public static boolean bCheckPhoneNo(String sPhoneNo) {
+    if (sPhoneNo == null) {
+        return false;
+    }
+ 
+    /* Reference : 
+    Stack Overflow. 2010."Regex - simple phone number".[Online]. Available at:https://stackoverflow.com/questions/3256547/regex-simple-phone-number?__cf_chl_rt_tk=GVcz2YeVDP7OYBfCJjZ4Ha4RKPPL4Mqydg2QM2yDqJw-1790612091-1.0.1.1-rnG1ht01mUMXGT5WG_aDHlkJxwqTsP_4qP7_bOThQ5k[Accessed : 28 September 2026].
+    This checks for international codes followed by 10 digits
+    */
+    String regex = "/^[0-9]*^[()-]*$/";
+    
+    Pattern pattern = Pattern.compile(regex);
+    Matcher matcher = pattern.matcher(sPhoneNo);
+    
+    return matcher.matches();
+   }
 
-//Prompting user for their information to validate it
+//Prompting user for their username to capture and validate it
 public static void main(String[] args) { 
-      try (Scanner scanner = new Scanner(System.in)) {
+      Scanner scanner = new Scanner(System.in);
+      
+         //Prompting user for thier  username to capture and validate it
           System.out.print("Enter your username: ");
-          String sUsername = scanner.nextLine();
+             String sUsername = scanner.nextLine();
           
           if (bCheckUsername(sUsername)) {
               System.out.println("Username successfully captured");
           } else {
               System.out.println("Username is not correctly formatted: please ensure that your username contains an underscore and is nomore than five characters in length.");
           }
-          
+        
+          //Prompting user for their password to capture and validate it
           System.out.println("Enter your password: ");
-          String sPassword = scanner.nextLine();
+            String sPassword = scanner.nextLine();
           
           if (bCheckPassword(sPassword)) {
               System.out.println("Password succcessfully captured.");
           } else {
               System.out.println("Password is not correctly formatted; please ensure that your password contains at least eight characters, a capital letter, a number , and a special character.");
-          } }
+          } 
+         
+            //Prompting user for their cellphone number to capture and validate it
+            System.out.println("Enter your cellphone number using your international code: ");
+              String sPhoneNo = scanner.nextLine();
+              
+              if (bCheckPhoneNo(sPhoneNo)) {
+                  System.out.println("Cellphone number successfully added.");
+              } else {
+                  System.out.println("Cellphone number incorrectly formatted or does not contain international code.");
+              }
 }
 }
+
