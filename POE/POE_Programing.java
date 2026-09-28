@@ -65,13 +65,34 @@ public static boolean bCheckPhoneNo (String sPhoneNo) {
     Pattern pattern = Pattern.compile(regex);
     Matcher matcher = pattern.matcher(sPhoneNo);
     return sPhoneNo.matches(regex);
-
 }
+    
+    // Checks if login information match stored information
+    public static boolean bLogin(String sEUsername, String sEPassword, String sSUser, String sSPass) {
+        return sEUsername.equals(sSUser) && sEPassword.equals(sSPass);
+    }
+
+    // Generates the appropriate login status message
+    public static String returnLoginStatus(boolean bLoggedIn, String sFirstName, String sLastName) {
+        if (bLoggedIn) {
+            return "Welcome " + sFirstName + ", " + sLastName + " it is great to see you again.";
+        } else {
+            return "Username or password incorrect, please try again.";
+        }
+    }
+
     
 
 public static void main(String[] args) { 
     //Initiating scanner
       Scanner scanner = new Scanner(System.in);
+      
+        System.out.print("Enter your first name: ");
+        String sFirstName = scanner.nextLine();
+
+        System.out.print("Enter your last name: ");
+        String sLastName = scanner.nextLine();
+
           
        //Prompting user for username to capture and validate 
           System.out.print("Enter your username: ");
@@ -102,8 +123,21 @@ public static void main(String[] args) {
           } else { 
               System.out.println("Cell phone number incorrectly formatted or does not contain international code.");
           }
-          //System.out.println("NutterButter");
+          
+        //Welcome message   
+         System.out.println("\n--- LOGIN SECTION ---");
+         
+         System.out.print("Enter your username to login: ");
+         String sLogUsername = scanner.nextLine();
+
+         System.out.print("Enter your password to login: ");
+          String sLogPassword = scanner.nextLine();
+          boolean bLoggedIn = loginUser(sLogUsername, sLogPassword, sUsername, sPassword);
+            String loginMessage = returnLoginStatus(bLoggedIn, sFirstName, sLastName);
+            
+        System.out.println(loginMessage);
+    
+        System.out.println("NutterButter");
           scanner.close();
 }
 }
-
