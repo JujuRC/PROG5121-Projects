@@ -1,6 +1,9 @@
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  */
+
+package com.mycompany.poe_programing;
+
 /**
  *
  * @author justi
@@ -45,6 +48,7 @@ public static boolean bCheckPassword(String sPassword) {
     return bCapital && bNumber && bSpecial;
 }
 
+
 //Prompting user for their information to validate it
 public static void main(String[] args) { 
       try (Scanner scanner = new Scanner(System.in)) {
@@ -67,6 +71,3 @@ public static void main(String[] args) {
           } }
 }
 }
-
-   
- 
