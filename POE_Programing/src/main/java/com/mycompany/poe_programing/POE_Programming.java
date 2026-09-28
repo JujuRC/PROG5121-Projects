@@ -11,7 +11,7 @@ package com.mycompany.poe_programing;
 
 import java.util.Scanner;
 
-public class Programming_POE{    
+public class POE_Programming{    
 
     // --- MAIN APPLICATION CLASS ---
     public static void main(String[] args) {
