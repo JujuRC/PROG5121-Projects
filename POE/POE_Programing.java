@@ -56,19 +56,19 @@ public static boolean bCheckPhoneNo(String sPhoneNo) {
         return false;
     }
  
-    /* Reference : 
-    Stack Overflow. 2010."Regex - simple phone number".[Online]. Available at:https://stackoverflow.com/questions/3256547/regex-simple-phone-number?__cf_chl_rt_tk=GVcz2YeVDP7OYBfCJjZ4Ha4RKPPL4Mqydg2QM2yDqJw-1790612091-1.0.1.1-rnG1ht01mUMXGT5WG_aDHlkJxwqTsP_4qP7_bOThQ5k[Accessed : 28 September 2026].
-    This checks for international codes followed by 10 digits
+   
+    /* Reference:
+    UIBakery.2015."Phone number regex Java".[Online]. Available at:https://uibakery.io/regex-library/phone-number-java[Accessed: 28 September 2026].
+    This regex checks for an internation code followed by up to 10 digits.
     */
-    String regex = "/^[0-9]*^[()-]*$/";
+    
+    String regex = ("^\\+?[1-9][0-9]{7,14}$");
     
     Pattern pattern = Pattern.compile(regex);
     Matcher matcher = pattern.matcher(sPhoneNo);
-    
-    return matcher.matches();
-   }
+    return sPhoneNo.matches();
 
-//Prompting user for their username to capture and validate it
+}//Prompting user for their username to capture and validate it
 public static void main(String[] args) { 
       Scanner scanner = new Scanner(System.in);
       
@@ -103,4 +103,3 @@ public static void main(String[] args) {
               }
 }
 }
-
