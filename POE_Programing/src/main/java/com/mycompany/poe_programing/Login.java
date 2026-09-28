@@ -13,7 +13,7 @@ import java.util.Scanner;
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;
         
-class Login {
+public class Login {
     private String sStoredUsername;
     private String sStoredPassword;
     private String sStoredPhoneNo;
