@@ -7,7 +7,7 @@
 import com.mycompany.poe_programing.Messages;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
-
+import java.util.Scanner;
 /**
  *
  * @author justi
@@ -53,9 +53,37 @@ public void testCorrectNumber() {
     assertEquals("Cell phone number successfully captured. ",result);
 }
     
-  // --- TESTS FOR RECIPIENT NUMBER VALIDATION ---
+  // --- TESTS FOR HASH VALIDATION ---
 
 
+@Test
+public void testMessageHash() {
+    Messages message = new Messages(0,"+27718693002","Hi Mike, can you join us for dinner tonight?");
+    String result = message.getMessageHash();
+    assertTrue( result.matches("\\d{2}:0:HITONIGHT"),"The hash should contain the first two ID digits, " + "the message number, and the first and last words.");
+}
 
-    
+ // --- TESTS FOR MESSAGE ID VALIDATION ---
+@Test
+public void testMessageID() {
+    Messages message = new Messages(2,"+27718693002","Hi Mike, can you join us for dinner tonight?");
+    boolean result = message.checkMessageID();
+    assertTrue(result);
+    assertEquals(10, message.getMessageID().length());
+}
+
+ // --- TESTS FOR SENT MESSAGE VALIDATION ---
+@Test
+public void testSendMessage() {
+    Messages message = new Messages(2,"+27718693002","Hi Mike, can you join us for dinner tonight?" );
+    String result = message.SentMessage(new Scanner("1"));
+    assertEquals("Message successfully sent.", result);
+}
+
+@Test
+public void testDisregardMessage() {
+    Messages message = new Messages(1,"08575975889","Hi Keegan, did you receive the payment?");
+    String result = message.SentMessage(new Scanner("2"));
+    assertEquals("Press 0 to delete the message.", result);
+}
 }

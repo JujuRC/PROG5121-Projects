@@ -73,9 +73,10 @@ public class Messages {
      //Checks if the message text is more than 250 characters.
     public String validateMessageLength() {
         if (this.sMessageText != null && this.sMessageText.length() > 250) {
-            return "Please enter a message of less than 250 characters.";
+            int len = sMessageText.length() - 250;
+            return "Message exceeds 250 characters by " + len +",please reduce the size. ";
         }
-        return "Message sent";
+        return "Message ready to send.";
     }
 
  //Creates message hash 
@@ -111,14 +112,14 @@ public class Messages {
         switch (choice) {
             case 1:
                 totalMessagesSent++;
-                return "Message successfully sent";
+                return "Message successfully sent.";
 
             case 2:
-                return "Press 0 to delete the message";
+                return "Press 0 to delete the message.";
 
             case 3:
                 storeMessage();
-                return "Message successfully stored";
+                return "Message successfully stored.";
 
             default:
                 return "Invalid choice selected.";
