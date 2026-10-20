@@ -39,7 +39,7 @@ public class POE_Programming{
         
         // Only prompt login if registration was successful
         if (registrationResult.contains("successfully")) {
-            System.out.println("--- LOGIN SECTION ---");
+            System.out.println("--- LOGIN ---");
 
             System.out.print("Enter username to login: ");
             String loginUser = scanner.nextLine();
@@ -116,3 +116,4 @@ public class POE_Programming{
 
         scanner.close();
     }
+}
