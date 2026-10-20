@@ -13,6 +13,10 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Random;
 import java.util.Scanner;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 public class Messages {
 
@@ -139,26 +143,111 @@ public class Messages {
 
     //Custom method to store the message in JSON format to a local file.
      
-    public void storeMessage() {
-        String jsonPayload = String.format(
-            "{\n" +
-            "  \"messageID\": \"%s\",\n" +
-            "  \"messageNumber\": %d,\n" +
-            "  \"recipient\": \"%s\",\n" +
-            "  \"message\": \"%s\",\n" +
-            "  \"messageHash\": \"%s\"\n" +
-            "}",
-            sMessageID, iMessageN0, sRecipient, sMessageText.replace("\"", "\\\""), sMessageHash
-        );
+  
+    // Escapes special characters so text is safe to place in JSON.
+    private String escapeJson(String text) {
+        StringBuilder result = new StringBuilder();
 
-        try (FileWriter writer = new FileWriter("stored_messages.json", true)) {
-            writer.write(jsonPayload + ",\n");
-            System.out.println(">> Message saved to stored_messages.json");
-        } catch (IOException e) {
-            System.err.println("Error saving message to JSON file: " + e.getMessage());
+        for (char c : text.toCharArray()) {
+            switch (c) {
+                case '"':
+                    result.append("\\\"");
+                    break;
+                case '\\':
+                    result.append("\\\\");
+                    break;
+                case '\n':
+                    result.append("\\n");
+                    break;
+                case '\r':
+                    result.append("\\r");
+                    break;
+                case '\t':
+                    result.append("\\t");
+                    break;
+                case '\b':
+                    result.append("\\b");
+                    break;
+                case '\f':
+                    result.append("\\f");
+                    break;
+                default:
+                    if (c < 0x20) {
+                        result.append(String.format("\\u%04x", (int) c));
+                    } else {
+                        result.append(c);
+                    }
+                    break;
+            }
         }
+
+        return result.toString();
     }
 
+    // Stores messages in a valid JSON array.
+    public void storeMessage() {
+        String jsonPayload =
+            "{\n" +
+            "  \"messageID\": \"" + escapeJson(sMessageID) + "\",\n" +
+            "  \"messageNumber\": " + iMessageN0 + ",\n" +
+            "  \"recipient\": \"" + escapeJson(sRecipient) + "\",\n" +
+            "  \"message\": \"" + escapeJson(sMessageText) + "\",\n" +
+            "  \"messageHash\": \"" + escapeJson(sMessageHash) + "\"\n" +
+            "}";
+
+        Path path = Paths.get("stored_messages.json");
+
+        try {
+            String content = "[]";
+
+            if (Files.exists(path)) {
+                content = new String(
+                    Files.readAllBytes(path),
+                    StandardCharsets.UTF_8
+                ).trim();
+
+                if (content.isEmpty()) {
+                    content = "[]";
+                }
+            }
+
+            // Check that the existing file is a JSON array.
+            if (!content.startsWith("[") || !content.endsWith("]")) {
+                throw new IOException(
+                    "The existing file is not a valid JSON array."
+                );
+            }
+
+            // Remove the opening and closing array brackets.
+            String existingMessages =
+                content.substring(1, content.length() - 1).trim();
+
+            String updatedContent;
+
+            if (existingMessages.isEmpty()) {
+                updatedContent = "[\n" + jsonPayload + "\n]";
+            } else {
+                updatedContent =
+                    "[\n" + existingMessages + ",\n" +
+                    jsonPayload + "\n]";
+            }
+
+            Files.write(
+                path,
+                updatedContent.getBytes(StandardCharsets.UTF_8)
+            );
+
+            System.out.println(
+                "Message saved to stored_messages.json"
+            );
+
+        } catch (IOException e) {
+            System.err.println(
+                "Error saving message: " + e.getMessage()
+            );
+        }
+    }
+    
     // Getters
     public String getMessageID() { return sMessageID; }
     public String getMessageHash() { return sMessageHash; }

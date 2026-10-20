@@ -36,10 +36,11 @@ public class POE_Programming{
         // Process Registration
         String registrationResult = userAccount.registerUser(regUsername, regPassword, regPhoneNo);
         System.out.println(registrationResult);
-
+        
         // Only prompt login if registration was successful
         if (registrationResult.contains("successfully")) {
             System.out.println("--- LOGIN SECTION ---");
+
             System.out.print("Enter username to login: ");
             String loginUser = scanner.nextLine();
 
@@ -48,10 +49,70 @@ public class POE_Programming{
 
             boolean success = userAccount.bLoginUser(loginUser, loginPass);
             System.out.println(userAccount.returnLoginStatus(success));
+
+            // Show menu only after successful login
+            if (success) {
+                int choice = 0;
+                int messageNumber = 1;
+
+                while (choice != 3) {
+                    System.out.println("\n--- Welcome to QuikChat ---");
+                    System.out.println("1. Send a Message");
+                    System.out.println("2. Show Recently Sent Messages");
+                    System.out.println("3. Quit");
+                    System.out.print("Choose an option: ");
+
+                    String input = scanner.nextLine();
+
+                    try {
+                        choice = Integer.parseInt(input);
+                    } catch (NumberFormatException e) {
+                        System.out.println("Please enter 1, 2, or 3.");
+                        continue;
+                    }
+
+                    switch (choice) {
+                        case 1:
+                            System.out.print("Enter recipient cell number: ");
+                            String recipient = scanner.nextLine();
+
+                            System.out.print("Enter your message: ");
+                            String messageText = scanner.nextLine();
+
+                            Messages message = new Messages(
+                                messageNumber, recipient, messageText
+                            );
+
+                            if (messageText.length() > 250) {
+                                System.out.println(
+                                    "Message exceeds the maximum of 250 characters."
+                                );
+                                break;
+                            }
+
+                            System.out.println(
+                                message.SentMessage(scanner)
+                            );
+
+                            messageNumber++;
+                            break;
+
+                        case 2:
+                            System.out.println("Coming soon.");
+                            break;
+
+                        case 3:
+                            System.out.println("Goodbye!");
+                            break;
+
+                        default:
+                            System.out.println(
+                                "Invalid option. Please choose 1, 2, or 3."
+                            );
+                    }
+                }
+            }
         }
-        
-        // Check if program runs
-        System.out.println("NutterButter");
+
         scanner.close();
     }
-}
