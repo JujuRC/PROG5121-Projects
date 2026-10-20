@@ -137,14 +137,10 @@ public class Messages {
     }
 
     // Returns total messages sent.
-     
     public static int returnTotalMessagess() {
         return totalMessagesSent;
     }
-
-    //Custom method to store the message in JSON format to a local file.
-     
-  
+    
     // Escapes special characters so text is safe to place in JSON.
     private String escapeJson(String text) {
         StringBuilder result = new StringBuilder();
