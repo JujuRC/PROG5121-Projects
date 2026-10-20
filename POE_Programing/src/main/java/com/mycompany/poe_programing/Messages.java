@@ -61,12 +61,12 @@ public class Messages {
   //Checks if the recieptents number is 10 numbers long 
     public String checkRecipientCell() {
         if (sRecipient == null || sRecipient.length() > 10) {
-            return "Invalid cell number: must not exceed 10 characters.";
+            return "Cell phone number is incorrectly formatted or does not contain an international code. Please correct the number and try again. ";
         }
         if (!sRecipient.startsWith("+")) {
-            return "Invalid cell number: must contain an international code.";
+            return "Cell phone number is incorrectly formatted or does not contain an international code. Please correct the number and try again. ";
         }
-        return "Cell number is valid.";
+        return "Cell phone number successfully captured. ";
     }
 
     

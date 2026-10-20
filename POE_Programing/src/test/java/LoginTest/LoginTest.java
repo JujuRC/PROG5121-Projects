@@ -25,7 +25,7 @@ public class LoginTest {
     public void testUsernameCorrectlyFormatted() {
         Login login = new Login();
         boolean result = login.bCheckUsername("kyl_1");
-        assertTrue(result,"Username should be valid");
+        assertTrue(result,"Username should be valid.");
     }
 
     @Test

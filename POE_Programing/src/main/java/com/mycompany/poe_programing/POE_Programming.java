@@ -78,9 +78,9 @@ public class POE_Programming{
                              scanner.nextLine();
 
                           //Loop for number of messages
-                             for (int i = 0; i < numMessagesToSend; i++) {
-                             System.out.println("\n--- Message " + (i + 1) + " of " + numMessagesToSend + " ---");
-                        
+                            for (int i = 0; i < numMessagesToSend; i++) {
+                            System.out.println("\n--- Message " + (i + 1) + " of " + numMessagesToSend + " ---");
+                            
                             System.out.print("Enter recipient cell number: ");
                             String recipient = scanner.nextLine();
 

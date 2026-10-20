@@ -79,13 +79,13 @@ public class Login {
     // Register User method
     public String registerUser(String username, String password, String phoneNo) {
         if (!bCheckUsername(username)) {
-            return "Username is not correctly formatted; please ensure that your username contains an underscore and is no more than five characters in length.";
+            return "Username should be invalid due to length/format";
         }
         if (!bCheckPasswordComplexity(password)) {
-            return "Password is not correctly formatted; please ensure that the password contains at least eight characters, a capital letter, a number, and a special character.";
+            return "Password should fail complexity check";
         }
         if (!bCheckPhoneNo(phoneNo)) {
-            return "Cell phone number incorrectly formatted or does not contain international code.";
+            return "Phone number should fail without international code/length.";
         }
 
         // Save information using the correct field names
