@@ -50,6 +50,7 @@ public class POE_Programming{
             System.out.println(userAccount.returnLoginStatus(success));
         }
         
+        // Check if program runs
         System.out.println("NutterButter");
         scanner.close();
     }
