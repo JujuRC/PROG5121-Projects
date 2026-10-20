@@ -73,6 +73,14 @@ public class POE_Programming{
 
                     switch (choice) {
                         case 1:
+                            System.out.print("How many messages would you like to send? ");
+                             int numMessagesToSend = scanner.nextInt();
+                             scanner.nextLine();
+
+                          //Loop for number of messages
+                             for (int i = 0; i < numMessagesToSend; i++) {
+                             System.out.println("\n--- Message " + (i + 1) + " of " + numMessagesToSend + " ---");
+                        
                             System.out.print("Enter recipient cell number: ");
                             String recipient = scanner.nextLine();
 
@@ -96,7 +104,7 @@ public class POE_Programming{
 
                             messageNumber++;
                             break;
-
+                             }
                         case 2:
                             System.out.println("Coming soon.");
                             break;
