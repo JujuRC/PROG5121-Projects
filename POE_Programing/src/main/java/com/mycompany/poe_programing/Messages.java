@@ -26,21 +26,21 @@ public class Messages {
 
     // Instance attributes
     private String sMessageID;
-    private int iMessageN0; 
+    private int iMessageNo; 
     private String sRecipient;
     private String sMessageText;
     private String sMessageHash;
 
+    //Declaration of arrays
     private String [] sSentM;
-    private String [] sDisgardedM;
+    private String [] sDisregardedM;
     private String [] sStoredM;
     private String [] sMHash;
     private String [] sMID;
     
     private Scanner scanner = new Scanner(System.in);
-    
     public Messages (int messNo, String recipient, String messText) {
-       this.iMessageN0 =messNo;
+       this.iMessageNo =messNo;
         this.sRecipient = recipient;
         this.sMessageText = messText;
         
@@ -103,7 +103,7 @@ public class Messages {
         String lastWord = words[words.length - 1];
 
         //Combined and make uppercase
-        String rawHash = firstTwoID + ":" + iMessageN0 + ":" + firstWord + lastWord;
+        String rawHash = firstTwoID + ":" + iMessageNo + ":" + firstWord + lastWord;
         return rawHash.toUpperCase();
     }
 
@@ -135,17 +135,7 @@ public class Messages {
         }
     }
 
-    
-    public void populateUserArrays(int capacity) {
-        sSentM = new String[capacity];
-        sDisgardedM = new String[capacity];
-        sMHash = new String[capacity];
-        sMID = new String[capacity];
-        
-        
-           
-        
-    }
+
     // Displays message details in the required order
     public String printMessages() {
         return "----------------------------------------\n" +
@@ -161,6 +151,31 @@ public class Messages {
         return totalMessagesSent;
     }
     
+    //Populate arrays 
+      public void populateUserArrays(int capacity) {
+        sSentM = new String[capacity];
+        sDisregardedM = new String[capacity];
+        sMHash = new String[capacity];
+        sMID = new String[capacity];
+        
+        System.out.println("\n--- Entering Message Data ---");
+        for (int i = 0; i < capacity; i++) {
+            System.out.println("\nRecord " + (i + 1) + " of " + capacity);
+            
+            System.out.print("Enter Message ID: ");
+            sMID[i] = scanner.nextLine();
+
+            System.out.print("Enter Sent Message: ");
+            sSentM[i] = scanner.nextLine();
+
+            System.out.print("Enter Disregarded Message: ");
+            sDisregardedM[i] = scanner.nextLine();
+
+            System.out.print("Enter Message Hash: ");
+            sMHash[i] = scanner.nextLine();
+        }
+    }
+         
     // Escapes special characters so text is safe to place in JSON.
     private String escapeJson(String text) {
         StringBuilder result = new StringBuilder();
@@ -200,13 +215,13 @@ public class Messages {
 
         return result.toString();
     }
-
+    
     // Stores messages in a valid JSON array.
     public void storeMessage() {
         String jsonPayload =
             "{\n" +
             "  \"messageID\": \"" + escapeJson(sMessageID) + "\",\n" +
-            "  \"messageNumber\": " + iMessageN0 + ",\n" +
+            "  \"messageNumber\": " + iMessageNo + ",\n" +
             "  \"recipient\": \"" + escapeJson(sRecipient) + "\",\n" +
             "  \"message\": \"" + escapeJson(sMessageText) + "\",\n" +
             "  \"messageHash\": \"" + escapeJson(sMessageHash) + "\"\n" +
@@ -263,7 +278,20 @@ public class Messages {
                 "Error saving message: " + e.getMessage()
             );
         }
+    }  
+    
+    //Reads the JSON parsing library 
+       public void loadStoredMessagesFromJson(String filePath) {
+        try {
+            java.util.List<String> lines = Files.readAllLines(Paths.get(filePath));
+            sStoredM = lines.toArray(String[]::new);
+            System.out.println("\nSuccessfully loaded " + sStoredM.length + " stored messages from JSON file.");
+        } catch (IOException e) {
+            System.out.println("Error reading the JSON file: " + e.getMessage());
+            sStoredM = new String[0];
+        }
     }
+  
     
     // Getters
     public String getMessageID() { return sMessageID; }

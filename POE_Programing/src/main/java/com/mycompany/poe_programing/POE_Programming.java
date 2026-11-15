@@ -71,57 +71,58 @@ public class POE_Programming{
                         continue;
                     }
 
-                    switch (choice) {
-                        case 1:
-                            System.out.print("How many messages would you like to send? ");
-                             int numMessagesToSend = scanner.nextInt();
-                             scanner.nextLine();
-
-                          //Loop for number of messages
-                            for (int i = 0; i < numMessagesToSend; i++) {
-                            System.out.println("\n--- Message " + (i + 1) + " of " + numMessagesToSend + " ---");
-                            
-                            System.out.print("Enter recipient cell number: ");
-                            String recipient = scanner.nextLine();
-
-                            System.out.print("Enter your message: ");
-                            String messageText = scanner.nextLine();
-
-                            Messages message = new Messages(
-                                messageNumber, recipient, messageText
-                            );
-
-                            if (messageText.length() > 250) {
-                                System.out.println(
-                                    "Message exceeds the maximum of 250 characters."
-                                );
-                                break;
-                            }
-
-                            System.out.println(
-                                message.SentMessage(scanner)
-                            );
-
-                            messageNumber++;
-                            break;
-                             }
-                        case 2:
-                            System.out.println("Coming soon.");
-                            break;
-
-                        case 3:
-                            System.out.println("Goodbye!");
-                            break;
-
-                        default:
-                            System.out.println(
-                                "Invalid option. Please choose 1, 2, or 3."
-                            );
-                    }
-                }
-            }
+   switch (choice) {
+    case 1:
+        int numMessagesToSend;
+        try {
+            System.out.print("How many messages would you like to send? ");
+            numMessagesToSend = Integer.parseInt(scanner.nextLine().trim());
+        } catch (NumberFormatException e) {
+            System.out.println("Please enter a valid number.");
+            break;
         }
 
+        for (int i = 0; i < numMessagesToSend; i++) {
+            System.out.println("\n--- Message " + (i + 1) + " of " + numMessagesToSend + " ---");
+
+            System.out.print("Enter recipient cell number: ");
+            String recipient = scanner.nextLine();
+
+            System.out.print("Enter your message: ");
+            String messageText = scanner.nextLine();
+
+            Messages message = new Messages(messageNumber, recipient, messageText);
+
+            String cellCheck = message.checkRecipientCell();
+            System.out.println(cellCheck);
+            if (!cellCheck.contains("successfully")) {
+                continue;
+            }
+
+            String lengthCheck = message.validateMessageLength();
+            System.out.println(lengthCheck);
+            if (!lengthCheck.equals("Message ready to send.")) {
+                continue;
+            }
+
+            System.out.println(message.SentMessage(scanner));
+            messageNumber++;
+        }
+        break;
+
+    case 2:
+        System.out.println("Coming soon.");
+        break;
+
+    case 3:
+        System.out.println("Goodbye!");
+        break;
+
+    default:
+        System.out.println("Invalid option. Please choose 1, 2, or 3.");
+}
+                }}
         scanner.close();
+    }
     }
 }
