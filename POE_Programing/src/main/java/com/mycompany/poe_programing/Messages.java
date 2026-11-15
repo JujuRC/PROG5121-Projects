@@ -69,14 +69,11 @@ public class Messages {
   
   //Checks if the recieptents number is 10 numbers long 
     public String checkRecipientCell() {
-        if (sRecipient == null || sRecipient.length() > 10) {
-            return "Cell phone number is incorrectly formatted or does not contain an international code. Please correct the number and try again. ";
-        }
-        if (!sRecipient.startsWith("+")) {
-            return "Cell phone number is incorrectly formatted or does not contain an international code. Please correct the number and try again. ";
-        }
+    if (sRecipient != null && sRecipient.matches("^\\+[1-9][0-9]{7,14}$")) {
         return "Cell phone number successfully captured. ";
     }
+    return "Cell phone number is incorrectly formatted or does not contain an international code. Please correct the number and try again. ";
+}
 
     
      //Checks if the message text is more than 250 characters.

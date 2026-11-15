@@ -69,7 +69,7 @@ public class Login {
         This regex checks for an international code followed by up to 10 digits.
         */
         
-        String regex = ("^\\+?[1-9][0-9]{7,14}$");
+        String regex = ("^\\\\+[1-9][0-9]{7,14}$");
         
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(sPhoneNo);
