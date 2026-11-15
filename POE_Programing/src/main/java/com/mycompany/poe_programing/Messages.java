@@ -9,6 +9,7 @@ package com.mycompany.poe_programing;
  * @author justi
  */
 
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Random;
@@ -30,6 +31,14 @@ public class Messages {
     private String sMessageText;
     private String sMessageHash;
 
+    private String [] sSentM;
+    private String [] sDisgardedM;
+    private String [] sStoredM;
+    private String [] sMHash;
+    private String [] sMID;
+    
+    private Scanner scanner = new Scanner(System.in);
+    
     public Messages (int messNo, String recipient, String messText) {
        this.iMessageN0 =messNo;
         this.sRecipient = recipient;
@@ -126,6 +135,17 @@ public class Messages {
         }
     }
 
+    
+    public void populateUserArrays(int capacity) {
+        sSentM = new String[capacity];
+        sDisgardedM = new String[capacity];
+        sMHash = new String[capacity];
+        sMID = new String[capacity];
+        
+        
+           
+        
+    }
     // Displays message details in the required order
     public String printMessages() {
         return "----------------------------------------\n" +

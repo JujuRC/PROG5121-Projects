@@ -9,15 +9,11 @@ package com.mycompany.poe_programing;
  * @author justi
  */
 
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
+
 import java.util.Scanner;
 
 public class POE_Programming{    
-
-    // --- MAIN APPLICATION CLASS ---
+   
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         Login userAccount = new Login();
