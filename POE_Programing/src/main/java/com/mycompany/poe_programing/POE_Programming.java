@@ -60,6 +60,7 @@ public class POE_Programming{
                     System.out.println("1. Send a Message");
                     System.out.println("2. Show Recently Sent Messages");
                     System.out.println("3. Quit");
+                    System.out.println("4. Stored Messages");
                     System.out.print("Choose an option: ");
 
                     String input = scanner.nextLine();
@@ -67,7 +68,7 @@ public class POE_Programming{
                     try {
                         choice = Integer.parseInt(input);
                     } catch (NumberFormatException e) {
-                        System.out.println("Please enter 1, 2, or 3.");
+                        System.out.println("Please enter 1, 2, 3 or 4.");
                         continue;
                     }
 
@@ -105,7 +106,11 @@ public class POE_Programming{
                 continue;
             }
 
-            System.out.println(message.SentMessage(scanner));
+           String result = message.SentMessage(scanner);
+           System.out.println(result);
+               if (result.equals("Message successfully sent.")) {
+           System.out.println(message.printMessages());
+            }
             messageNumber++;
         }
         break;
@@ -115,9 +120,39 @@ public class POE_Programming{
         break;
 
     case 3:
+        System.out.println("Total messages sent: " + Messages.returnTotalMessagess());
         System.out.println("Goodbye!");
-        break;
+    break;
+    
+    case 4:
+        System.out.println("\n--- Stored Messages ---");
+        Messages.loadStoredMessageFromJson("stored_messages.json");
+        System.out.println("a. Display sender and recipient of all stored messages");
+        System.out.print("Choose an option: ");
+        String subChoice = scanner.nextLine().trim().toLowerCase();
 
+        if (subChoice.equals("a")) {
+            Messages.displaySendersAndRecipients(userAccount.getFirstName());
+         } else if (subChoice.equals("b")) {    
+            System.out.println("b. Display the longest stored message");
+         } else if (subChoice.equals("c")) {
+            System.out.print("Enter the message ID: ");
+            String searchID = scanner.nextLine().trim();
+            Messages.searchByMessageID(searchID);
+         } else if (subChoice.equals("d")) {
+            System.out.print("Enter the recipient's cell number: ");
+            String searchRecipient = scanner.nextLine().trim();
+            Messages.searchByRecipient(searchRecipient);
+         } else if (subChoice.equals("e")) {
+            System.out.print("Enter the message hash: ");
+            String deleteHash = scanner.nextLine().trim();
+            Messages.deleteByHash(deleteHash);
+         } else if (subChoice.equals("f")) {
+            Messages.displayStoredReport(userAccount.getFirstName());
+        } else {
+          System.out.println("Invalid option.");
+            }
+    break;
     default:
         System.out.println("Invalid option. Please choose 1, 2, or 3.");
 }
