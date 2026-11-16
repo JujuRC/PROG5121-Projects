@@ -6,11 +6,15 @@
 
 import com.mycompany.poe_programing.Messages;
 import static org.junit.jupiter.api.Assertions.*;
-import java.util.Scanner;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
+import java.lang.reflect.Field;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.Scanner;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Test;
 
 /**
  *
@@ -18,19 +22,56 @@ import java.io.PrintStream;
  */
 public class MessagesTest {
     
-  private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-  private final PrintStream originalOut = System.out;
+private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+private final PrintStream originalOut = System.out;
+private Messages m1, m2, m3, m4, m5;
 
 @BeforeEach
- public void setUpStreams() {
-    System.setOut(new PrintStream(outContent));
-}
+public void setUp() throws Exception {
+   Files.deleteIfExists(Paths.get("stored_messages.json"));
+   resetStaticFields();
+   m1 = new Messages(1, "+27834557896", "Did you get the cake?");
+   m2 = new Messages(2, "+27838884567", "Where are you? You are late! I have asked you to be on time.");
+   m3 = new Messages(3, "+27834484567", "Yohoooo, I am at your gate.");
+   m4 = new Messages(4, "0838884567", "It is dinner time !");
+   m5 = new Messages(5, "+27838884567", "Ok, I am leaving without you.");
+   m1.SentMessage(new Scanner("1\n")); // Flag: Sent
+   m2.SentMessage(new Scanner("3\n")); // Flag: Stored
+   m3.SentMessage(new Scanner("2\n")); // Flag: Disregard
+   m4.SentMessage(new Scanner("1\n")); // Flag: Sent
+   m5.SentMessage(new Scanner("3\n")); // Flag: Stored
+   Messages.loadStoredMessageFromJson("stored_messages.json");
+   System.setOut(new PrintStream(outContent));
+    }
+
+@AfterEach
+public void tearDown() throws Exception {
+   System.setOut(originalOut);
+   Files.deleteIfExists(Paths.get("stored_messages.json"));
+    }
+
+private void resetStaticFields() throws Exception {
+    Field sentArr = Messages.class.getDeclaredField("sSentM");
+    sentArr.setAccessible(true);
+    sentArr.set(null, new String[100]);
+    Field disArr = Messages.class.getDeclaredField("sDisregardedM");
+    disArr.setAccessible(true);
+    disArr.set(null, new String[100]);
+    Field sentCnt = Messages.class.getDeclaredField("sentCount");
+    sentCnt.setAccessible(true);
+    sentCnt.setInt(null, 0);
+    Field disCnt = Messages.class.getDeclaredField("disregardedCount");
+    disCnt.setAccessible(true);
+    disCnt.setInt(null, 0);
+    Field totalSent = Messages.class.getDeclaredField("totalMessagesSent");
+    totalSent.setAccessible(true);
+    totalSent.setInt(null, 0);
+    }
     
    // --- TESTS FOR MESSAGE LENGTH VALIDATION --- 
  
 @Test
 public void testIncorrectMessageLength() {
-
     String longtext ="Hi Mike, will you join us for dinner?".repeat(50);
     int len = longtext.length();
     Messages message = new Messages(1, "08575975889", longtext);
@@ -101,48 +142,53 @@ public void testDisregardMessage() {
     assertEquals("Press 0 to delete the message.", result);
 }
 
-// --- TEST FOR ARRAY POPULATION ---
-
+// --- TEST THE ARRAY POPULATION ---
+    
 @Test
- public void testSentMessagesArrayPopulated() {
-     Messages m1 = new Messages(1, "+27838884567", "Did you get the cake?");
-     Messages m2 = new Messages(2, "+27838884567", "It is dinner time!");
-     assertEquals("Did you get the cake?", m1.validateMessageLength() == "Message ready to send." ? m1.printMessages().contains("Did you get the cake?") ? "Did you get the cake?" : "" : "");
+public void testSentMessagesArrayPopulated() throws Exception {
+     Field sentArrField = Messages.class.getDeclaredField("sSentM");
+     sentArrField.setAccessible(true);
+     String[] sSentM = (String[]) sentArrField.get(null);
+     assertEquals("Did you get the cake?", sSentM[0]);
+     assertEquals("It is dinner time !", sSentM[1]);
 }
 
- //--- TEST FOR LONGEST MESSAGE FOR DISPLAY ---
- 
+// --- TEST FOR LONGEST MESSAGE ---
+    
 @Test
- public void testDisplayLongestMessage() {  
-     Messages msgLong = new Messages(3, "+27838884567", "Where are you? You are late! I have asked you to be on time.");
-     assertTrue(msgLong.validateMessageLength().contains("Message ready to send."));
-     assertEquals(61, msgLong.printMessages().indexOf("Where are you? You are late! I have asked you to be on time.") > 0 ? 61 : 61);
+public void testDisplayLongestMessage() {
+     Messages.displayLongestMessage();
+     String output = outContent.toString();
+     assertTrue(output.contains("Where are you? You are late! I have asked you to be on time."));
 }
- 
- //--- TEST FOR MESSAGE SEARCH ---
- 
+
+// --- TEST FOR MESSAGE SEARCH BY ID ---
+    
 @Test
 public void testSearchByMessageID() {
-     Messages m4 = new Messages(4, "+27838884567", "It is dinner time!");
-     assertNotNull(m4.getMessageID());
-     assertTrue(m4.checkMessageID());
+     String idToSearch = m4.getMessageID();
+     Messages.searchByMessageID(m2.getMessageID());
+     String output = outContent.toString();
+     assertTrue(output.contains("Where are you? You are late! I have asked you to be on time."));
 }
 
-//--- TEST FOR RECIPIENT SEARCH ---
-
-@Test 
+// --- TEST FOR RECIPIENT SEARCH ---
+    
+@Test
 public void testSearchByRecipient() {
-     Messages m = new Messages(1, "+27838884567", "Ok, I am leaving without you.");
-     assertEquals("Cell phone number successfully captured. ", m.checkRecipientCell());
- }
+     Messages.searchByRecipient("+27838884567");
+     String output = outContent.toString();
+     assertTrue(output.contains("Where are you? You are late! I have asked you to be on time."));
+     assertTrue(output.contains("Ok, I am leaving without you."));
+}
 
-//--- TEST FOR MESSAGE DELETION 
-
-@Test 
+// --- TEST FOR MESSAGE DELETION BY HASH ---
+    
+@Test
 public void testDeleteByHash() {
-     Messages m2 = new Messages(2, "+27838884567", "Where are you? You are late! I have asked you to be on time.");
-     String hash = m2.createMessageHash();
-     assertNotNull(hash);
-     assertFalse(hash.trim().isEmpty());
+     String hashToDelete = m2.getMessageHash();
+     Messages.deleteByHash(hashToDelete);
+     String output = outContent.toString();
+     assertTrue(output.contains("Message \"Where are you? You are late! I have asked you to be on time.\" successfully deleted."));
 }
 }
