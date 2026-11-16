@@ -1,20 +1,20 @@
 -------------------------------------------------------------------------------
 Test set: MessagesTest
 -------------------------------------------------------------------------------
-Tests run: 8, Failures: 3, Errors: 2, Skipped: 0, Time elapsed: 0.060 s <<< FAILURE! -- in MessagesTest
-MessagesTest.testMessageHash -- Time elapsed: 0.018 s <<< FAILURE!
+Tests run: 13, Failures: 3, Errors: 0, Skipped: 0, Time elapsed: 0.086 s <<< FAILURE! -- in MessagesTest
+MessagesTest.testMessageHash -- Time elapsed: 0.020 s <<< FAILURE!
 org.opentest4j.AssertionFailedError: The hash should contain the first two ID digits, the message number, and the first and last words. ==> expected: <true> but was: <false>
 	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
 	at org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
 	at org.junit.jupiter.api.AssertTrue.failNotTrue(AssertTrue.java:63)
 	at org.junit.jupiter.api.AssertTrue.assertTrue(AssertTrue.java:36)
 	at org.junit.jupiter.api.Assertions.assertTrue(Assertions.java:214)
-	at MessagesTest.testMessageHash(MessagesTest.java:63)
+	at MessagesTest.testMessageHash(MessagesTest.java:75)
 	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
 	at java.base/java.util.ArrayList.forEach(ArrayList.java:1612)
 	at java.base/java.util.ArrayList.forEach(ArrayList.java:1612)
 
-MessagesTest.testIncorrectMessageLength -- Time elapsed: 0.006 s <<< FAILURE!
+MessagesTest.testIncorrectMessageLength -- Time elapsed: 0.005 s <<< FAILURE!
 org.opentest4j.AssertionFailedError: expected: <Message exceeds 250 characters by 1850,please reduce the size. > but was: <Message exceeds 250 characters by 1600,please reduce the size. >
 	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
 	at org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
@@ -22,12 +22,12 @@ org.opentest4j.AssertionFailedError: expected: <Message exceeds 250 characters b
 	at org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:182)
 	at org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:177)
 	at org.junit.jupiter.api.Assertions.assertEquals(Assertions.java:1145)
-	at MessagesTest.testIncorrectMessageLength(MessagesTest.java:25)
+	at MessagesTest.testIncorrectMessageLength(MessagesTest.java:38)
 	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
 	at java.base/java.util.ArrayList.forEach(ArrayList.java:1612)
 	at java.base/java.util.ArrayList.forEach(ArrayList.java:1612)
 
-MessagesTest.testCorrectMessageLength -- Time elapsed: 0.003 s <<< FAILURE!
+MessagesTest.testCorrectMessageLength -- Time elapsed: 0.001 s <<< FAILURE!
 org.opentest4j.AssertionFailedError: expected: <Message ready to send. > but was: <Message ready to send.>
 	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
 	at org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
@@ -35,25 +35,7 @@ org.opentest4j.AssertionFailedError: expected: <Message ready to send. > but was
 	at org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:182)
 	at org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:177)
 	at org.junit.jupiter.api.Assertions.assertEquals(Assertions.java:1145)
-	at MessagesTest.testCorrectMessageLength(MessagesTest.java:34)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
-	at java.base/java.util.ArrayList.forEach(ArrayList.java:1612)
-	at java.base/java.util.ArrayList.forEach(ArrayList.java:1612)
-
-MessagesTest.testSendMessage -- Time elapsed: 0.011 s <<< ERROR!
-java.util.NoSuchElementException: No line found
-	at java.base/java.util.Scanner.nextLine(Scanner.java:1690)
-	at com.mycompany.poe_programing.Messages.SentMessage(Messages.java:133)
-	at MessagesTest.testSendMessage(MessagesTest.java:79)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
-	at java.base/java.util.ArrayList.forEach(ArrayList.java:1612)
-	at java.base/java.util.ArrayList.forEach(ArrayList.java:1612)
-
-MessagesTest.testDisregardMessage -- Time elapsed: 0.004 s <<< ERROR!
-java.util.NoSuchElementException: No line found
-	at java.base/java.util.Scanner.nextLine(Scanner.java:1690)
-	at com.mycompany.poe_programing.Messages.SentMessage(Messages.java:133)
-	at MessagesTest.testDisregardMessage(MessagesTest.java:86)
+	at MessagesTest.testCorrectMessageLength(MessagesTest.java:47)
 	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
 	at java.base/java.util.ArrayList.forEach(ArrayList.java:1612)
 	at java.base/java.util.ArrayList.forEach(ArrayList.java:1612)

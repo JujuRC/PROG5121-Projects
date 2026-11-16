@@ -12,12 +12,10 @@ import org.junit.jupiter.api.BeforeAll;*/
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
-
 /**
  *
  * @author justi
  */
-
 public class LoginTest {
 
     // --- TESTS FOR USERNAME VALIDATION ---
@@ -25,14 +23,14 @@ public class LoginTest {
     public void testUsernameCorrectlyFormatted() {
         Login login = new Login();
         boolean result = login.bCheckUsername("kyl_1");
-        assertTrue(result,"Username should be valid.");
+        assertTrue(result, "Username should be valid.");
     }
 
     @Test
     public void testUsernameIncorrectlyFormatted() {
         Login login = new Login();
         boolean result = login.bCheckUsername("kyle!!!!!!!");
-        assertFalse(result,"Username should be invalid due to length/format");
+        assertFalse(result, "Username should be invalid due to length/format");
     }
 
     // --- TESTS FOR PASSWORD COMPLEXITY ---
@@ -40,14 +38,14 @@ public class LoginTest {
     public void testPasswordMeetsComplexity() {
         Login login = new Login();
         boolean result = login.bCheckPasswordComplexity("Ch&&sec@ke99!");
-        assertTrue(result,"Password should meet complexity requirements");
+        assertTrue(result, "Password should meet complexity requirements");
     }
 
     @Test
     public void testPasswordDoesNotMeetComplexity() {
         Login login = new Login();
         boolean result = login.bCheckPasswordComplexity("password");
-        assertFalse( result,"Password should fail complexity check");
+        assertFalse(result, "Password should fail complexity check");
     }
 
     // --- TESTS FOR PHONE NUMBER VALIDATION ---
@@ -55,14 +53,14 @@ public class LoginTest {
     public void testPhoneNumCorrectlyFormatted() {
         Login login = new Login();
         boolean result = login.bCheckPhoneNo("+27838968976");
-        assertTrue( result,"Phone number should be valid with international code");
+        assertTrue(result, "Phone number should be valid with international code");
     }
 
     @Test
     public void testPhoneNumIncorrectlyFormatted() {
         Login login = new Login();
         boolean result = login.bCheckPhoneNo("08966553");
-        assertFalse(result,"Phone number should fail without international code/length");
+        assertFalse(result, "Phone number should fail without international code/length");
     }
 
     // --- TESTS FOR LOGIN FUNCTIONALITY ---
@@ -73,7 +71,7 @@ public class LoginTest {
         login.registerUser("kyl_1", "Ch&&sec@ke99!", "+27838968976");
         
         boolean result = login.bLoginUser("kyl_1", "Ch&&sec@ke99!");
-        assertTrue(result,"Login should succeed with correct credentials");
+        assertTrue(result, "Login should succeed with correct credentials");
     }
 
     @Test
@@ -82,7 +80,7 @@ public class LoginTest {
         login.registerUser("kyl_1", "Ch&&sec@ke99!", "+27838968976");
         
         boolean result = login.bLoginUser("kyl_1", "WrongPassword!");
-        assertFalse(result,"Login should fail with incorrect credentials");
+        assertFalse(result, "Login should fail with incorrect credentials");
     }
 
     // --- TESTS FOR REGISTRATION MESSAGING ---

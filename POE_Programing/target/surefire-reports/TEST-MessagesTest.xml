@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="MessagesTest" time="0.06" tests="8" errors="2" skipped="0" failures="3">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="MessagesTest" time="0.086" tests="13" errors="0" skipped="0" failures="3">
   <properties>
     <property name="java.specification.version" value="26"/>
     <property name="sun.cpu.isalist" value="amd64"/>
@@ -15,7 +15,7 @@
     <property name="user.country" value="ZA"/>
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Apache NetBeans\jdk\bin"/>
-    <property name="sun.java.command" value="C:\Users\justi\AppData\Local\Temp\surefire7953131788055008949\surefirebooter-20261116180703598_3.jar C:\Users\justi\AppData\Local\Temp\surefire7953131788055008949 2026-11-16T18-07-03_181-jvmRun1 surefire-20261116180703598_1tmp surefire_0-20261116180703598_2tmp"/>
+    <property name="sun.java.command" value="C:\Users\justi\AppData\Local\Temp\surefire17220576194740005266\surefirebooter-20261116214254370_3.jar C:\Users\justi\AppData\Local\Temp\surefire17220576194740005266 2026-11-16T21-42-53_687-jvmRun1 surefire-20261116214254370_1tmp surefire_0-20261116214254370_2tmp"/>
     <property name="jdk.debug" value="release"/>
     <property name="surefire.test.class.path" value="C:\Users\justi\OneDrive\Documents\PROGRAMMING\PROG5121-Projects\NetBeansProjects\PROG5121-Projects\POE_Programing\target\test-classes;C:\Users\justi\OneDrive\Documents\PROGRAMMING\PROG5121-Projects\NetBeansProjects\PROG5121-Projects\POE_Programing\target\classes;C:\Users\justi\.m2\repository\com\google\code\gson\gson\2.11.0\gson-2.11.0.jar;C:\Users\justi\.m2\repository\com\google\errorprone\error_prone_annotations\2.27.0\error_prone_annotations-2.27.0.jar;C:\Users\justi\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.10.3\junit-jupiter-api-5.10.3.jar;C:\Users\justi\.m2\repository\org\junit\platform\junit-platform-commons\1.10.3\junit-platform-commons-1.10.3.jar;C:\Users\justi\.m2\repository\org\apiguardian\apiguardian-api\1.1.2\apiguardian-api-1.1.2.jar;C:\Users\justi\.m2\repository\org\junit\jupiter\junit-jupiter-params\5.10.3\junit-jupiter-params-5.10.3.jar;C:\Users\justi\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.10.3\junit-jupiter-engine-5.10.3.jar;C:\Users\justi\.m2\repository\org\junit\platform\junit-platform-engine\1.10.3\junit-platform-engine-1.10.3.jar;C:\Users\justi\.m2\repository\org\opentest4j\opentest4j\1.3.0\opentest4j-1.3.0.jar;"/>
     <property name="sun.cpu.endian" value="little"/>
@@ -30,7 +30,7 @@
     <property name="line.separator" value="&#10;"/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
-    <property name="surefire.real.class.path" value="C:\Users\justi\AppData\Local\Temp\surefire7953131788055008949\surefirebooter-20261116180703598_3.jar"/>
+    <property name="surefire.real.class.path" value="C:\Users\justi\AppData\Local\Temp\surefire17220576194740005266\surefirebooter-20261116214254370_3.jar"/>
     <property name="user.script" value=""/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="java.runtime.version" value="26.0.1+8"/>
@@ -61,20 +61,20 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="java.class.version" value="70.0"/>
   </properties>
-  <testcase name="testMessageHash" classname="MessagesTest" time="0.018">
+  <testcase name="testMessageHash" classname="MessagesTest" time="0.02">
     <failure message="The hash should contain the first two ID digits, the message number, and the first and last words. ==&gt; expected: &lt;true&gt; but was: &lt;false&gt;" type="org.opentest4j.AssertionFailedError"><![CDATA[org.opentest4j.AssertionFailedError: The hash should contain the first two ID digits, the message number, and the first and last words. ==> expected: <true> but was: <false>
 	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
 	at org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
 	at org.junit.jupiter.api.AssertTrue.failNotTrue(AssertTrue.java:63)
 	at org.junit.jupiter.api.AssertTrue.assertTrue(AssertTrue.java:36)
 	at org.junit.jupiter.api.Assertions.assertTrue(Assertions.java:214)
-	at MessagesTest.testMessageHash(MessagesTest.java:63)
+	at MessagesTest.testMessageHash(MessagesTest.java:75)
 	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
 	at java.base/java.util.ArrayList.forEach(ArrayList.java:1612)
 	at java.base/java.util.ArrayList.forEach(ArrayList.java:1612)
 ]]></failure>
   </testcase>
-  <testcase name="testIncorrectMessageLength" classname="MessagesTest" time="0.006">
+  <testcase name="testIncorrectMessageLength" classname="MessagesTest" time="0.005">
     <failure message="expected: &lt;Message exceeds 250 characters by 1850,please reduce the size. &gt; but was: &lt;Message exceeds 250 characters by 1600,please reduce the size. &gt;" type="org.opentest4j.AssertionFailedError"><![CDATA[org.opentest4j.AssertionFailedError: expected: <Message exceeds 250 characters by 1850,please reduce the size. > but was: <Message exceeds 250 characters by 1600,please reduce the size. >
 	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
 	at org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
@@ -82,14 +82,16 @@
 	at org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:182)
 	at org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:177)
 	at org.junit.jupiter.api.Assertions.assertEquals(Assertions.java:1145)
-	at MessagesTest.testIncorrectMessageLength(MessagesTest.java:25)
+	at MessagesTest.testIncorrectMessageLength(MessagesTest.java:38)
 	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
 	at java.base/java.util.ArrayList.forEach(ArrayList.java:1612)
 	at java.base/java.util.ArrayList.forEach(ArrayList.java:1612)
 ]]></failure>
   </testcase>
+  <testcase name="testDisplayLongestMessage" classname="MessagesTest" time="0.004"/>
+  <testcase name="testSearchByMessageID" classname="MessagesTest" time="0.002"/>
   <testcase name="testIncorrectNumber" classname="MessagesTest" time="0.002"/>
-  <testcase name="testCorrectMessageLength" classname="MessagesTest" time="0.003">
+  <testcase name="testCorrectMessageLength" classname="MessagesTest" time="0.001">
     <failure message="expected: &lt;Message ready to send. &gt; but was: &lt;Message ready to send.&gt;" type="org.opentest4j.AssertionFailedError"><![CDATA[org.opentest4j.AssertionFailedError: expected: <Message ready to send. > but was: <Message ready to send.>
 	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
 	at org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
@@ -97,44 +99,17 @@
 	at org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:182)
 	at org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:177)
 	at org.junit.jupiter.api.Assertions.assertEquals(Assertions.java:1145)
-	at MessagesTest.testCorrectMessageLength(MessagesTest.java:34)
+	at MessagesTest.testCorrectMessageLength(MessagesTest.java:47)
 	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
 	at java.base/java.util.ArrayList.forEach(ArrayList.java:1612)
 	at java.base/java.util.ArrayList.forEach(ArrayList.java:1612)
 ]]></failure>
   </testcase>
-  <testcase name="testMessageID" classname="MessagesTest" time="0.001"/>
-  <testcase name="testSendMessage" classname="MessagesTest" time="0.011">
-    <error message="No line found" type="java.util.NoSuchElementException"><![CDATA[java.util.NoSuchElementException: No line found
-	at java.base/java.util.Scanner.nextLine(Scanner.java:1690)
-	at com.mycompany.poe_programing.Messages.SentMessage(Messages.java:133)
-	at MessagesTest.testSendMessage(MessagesTest.java:79)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
-	at java.base/java.util.ArrayList.forEach(ArrayList.java:1612)
-	at java.base/java.util.ArrayList.forEach(ArrayList.java:1612)
-]]></error>
-    <system-out><![CDATA[
-Choose an option for the message:
-1. Send Message
-2. Disregard Message
-3. Store Message to send later
-Enter choice (1-3): ]]></system-out>
-  </testcase>
-  <testcase name="testDisregardMessage" classname="MessagesTest" time="0.004">
-    <error message="No line found" type="java.util.NoSuchElementException"><![CDATA[java.util.NoSuchElementException: No line found
-	at java.base/java.util.Scanner.nextLine(Scanner.java:1690)
-	at com.mycompany.poe_programing.Messages.SentMessage(Messages.java:133)
-	at MessagesTest.testDisregardMessage(MessagesTest.java:86)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
-	at java.base/java.util.ArrayList.forEach(ArrayList.java:1612)
-	at java.base/java.util.ArrayList.forEach(ArrayList.java:1612)
-]]></error>
-    <system-out><![CDATA[
-Choose an option for the message:
-1. Send Message
-2. Disregard Message
-3. Store Message to send later
-Enter choice (1-3): ]]></system-out>
-  </testcase>
+  <testcase name="testSentMessagesArrayPopulated" classname="MessagesTest" time="0.002"/>
+  <testcase name="testMessageID" classname="MessagesTest" time="0.002"/>
+  <testcase name="testDeleteByHash" classname="MessagesTest" time="0.002"/>
+  <testcase name="testSendMessage" classname="MessagesTest" time="0.005"/>
+  <testcase name="testDisregardMessage" classname="MessagesTest" time="0.003"/>
+  <testcase name="testSearchByRecipient" classname="MessagesTest" time="0.002"/>
   <testcase name="testCorrectNumber" classname="MessagesTest" time="0.002"/>
 </testsuite>
